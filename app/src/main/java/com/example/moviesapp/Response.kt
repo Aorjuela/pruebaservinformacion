@@ -2,7 +2,7 @@ package com.example.moviesapp
 
 import com.google.gson.annotations.SerializedName
 
-data class Example (
+data class Response (
     @SerializedName("average_rating") var averageRating : Double,
     @SerializedName("backdrop_path") var backdropPath : String,
     //@SerializedName("comments") var comments : Comments,
@@ -16,7 +16,7 @@ data class Example (
     @SerializedName("page") var page : Int,
     @SerializedName("poster_path") var posterPath : String,
     @SerializedName("public") var public : Boolean,
-    @SerializedName("results") var results : List<Results>,
+    @SerializedName("results") var results : List<Movie>,
     @SerializedName("revenue") var revenue : Long,
     @SerializedName("runtime") var runtime : Int,
     @SerializedName("sort_by") var sortBy : String,

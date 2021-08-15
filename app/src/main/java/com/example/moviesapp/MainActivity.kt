@@ -2,7 +2,6 @@ package com.example.moviesapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,12 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         val apiService: ApiService? = retrofit?.create(ApiService::class.java)
 
-        apiService?.getMovies(3,1,RetrofitClientService.API_KEY)?.enqueue(object : Callback<Example>{
-            override fun onResponse(call: Call<Example>, response: Response<Example>) {
-                val example: Example? = response.body()
+        apiService?.getMovies(3,1,RetrofitClientService.API_KEY)?.enqueue(object : Callback<com.example.moviesapp.Response>{
+            override fun onResponse(call: Call<com.example.moviesapp.Response>, response: Response<com.example.moviesapp.Response>) {
+                val response: com.example.moviesapp.Response? = response.body()
                 val algo: String = "";
             }
-            override fun onFailure(call: Call<Example>, t: Throwable) {
+            override fun onFailure(call: Call<com.example.moviesapp.Response>, t: Throwable) {
                 t.printStackTrace()
             }
         })

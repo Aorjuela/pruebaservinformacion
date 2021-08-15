@@ -2,7 +2,7 @@ package com.example.moviesapp
 
 import com.google.gson.annotations.SerializedName
 
-class Results (
+class Movie (
     @SerializedName("adult") var adult : Boolean,
                @SerializedName("backdrop_path") var backdropPath : String,
                @SerializedName("genre_ids") var genreIds : List<Int>,
