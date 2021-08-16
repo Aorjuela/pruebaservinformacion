@@ -58,4 +58,15 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.3"
     // To use ViewModelProvides
     implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    ///////////////////////GROUPIE DEPENDECNIES/////////////////
+    implementation 'com.xwray:groupie:2.0.3'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.0.3'
+    implementation 'com.xwray:groupie-databinding:2.3.0'
+
+    //////////////////////RECYCLERVIEW DEPENDECNIES////////////
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+
+    ////////////////////VIEW MODEL SCOPE DEPENDECIES///////////
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 }

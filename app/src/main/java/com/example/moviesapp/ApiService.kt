@@ -11,5 +11,5 @@ interface ApiService {
     fun getMovies(
         @Path("list_num") listNum: Int,
         @Query("page") page: Int,
-        @Query("api_key") apiKey: String): Call<Response>
+        @Query("api_key") apiKey: String): Call<ServiceResponse>
 }
