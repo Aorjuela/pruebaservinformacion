@@ -2,6 +2,8 @@ package com.example.moviesapp
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -9,6 +11,7 @@ class MoviesRepository(
     private var moviesDAO: MoviesDAO?,
     private var executor: ExecutorService
 ) {
+    private val movieApiClient = MovieApiClient.getInstance()
     companion object {
         var INSTANCE: MoviesRepository? = null
         fun getInstance(context: Context): MoviesRepository? {
@@ -40,6 +43,14 @@ class MoviesRepository(
     }
 
     fun getAllMovies(): LiveData<List<Movie>>?{
-        return moviesDAO?.getAllMovies();
+        return moviesDAO?.getAllMovies()
+    }
+
+    fun getAllMoviesfromService() {
+        movieApiClient?.searchMoviesApi()
+    }
+
+    fun getMovies(): MutableLiveData<List<Movie>>?{
+        return movieApiClient?.getMovies()
     }
 }

@@ -2,6 +2,7 @@ package com.example.moviesapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val retrofit: Retrofit? = RetrofitClientService.getRetrofitInstance()
-        val apiService: ApiService? = retrofit?.create(ApiService::class.java)
         val adapter = GroupAdapter<ViewHolder>()
 
         var moviesViewModelFactory: MoviesViewModelFactory =
@@ -35,27 +34,24 @@ class MainActivity : AppCompatActivity() {
         moviesRecyclerView = findViewById(R.id.recycler_view_movies);
         moviesRecyclerView?.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        apiService?.getMovies(3,1,RetrofitClientService.API_KEY)?.enqueue(object : Callback<ServiceResponse>{
-
-            override fun onResponse(call: Call<ServiceResponse>, response: Response<ServiceResponse>
-            ) {
-                val serviceResponse: ServiceResponse? = response.body()
-                val moviesList: List<Movie>? = serviceResponse?.results
-                if (moviesList != null) {
-                    for(movie in moviesList) {
-                        moviesViewModel?.insert(movie)
-                    }
+        moviesViewModel?.getAllMovies()?.observe(this, Observer {
+            if(it.isNotEmpty()){
+                for(movie in it){
+                    adapter.add(MovieItem(movie))
                 }
+                moviesRecyclerView?.adapter = adapter
+            }else{
+                moviesViewModel?.getAllMoviesfromService()
+                moviesViewModel?.getMovies()?.observe(this, Observer {
+                    if(it != null){
+                        for(movie in it){
+                            moviesViewModel?.insert(movie)
+                        }
+                    }else{
+                        Toast.makeText(this, "No hay datos", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
-
-            override fun onFailure(call: Call<ServiceResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-
-        moviesViewModel?.getAllMovies()?.observe(this, Observer { Movies ->
-            Movies.forEach { adapter.add(MovieItem(it)) }
-            moviesRecyclerView?.adapter = adapter
         })
     }
 }

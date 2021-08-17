@@ -1,6 +1,7 @@
 package com.example.moviesapp
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MoviesViewModel(
@@ -21,5 +22,11 @@ class MoviesViewModel(
     fun getAllMovies(): LiveData<List<Movie>>?{
         moviesList = moviesRepository.getAllMovies()?.value
         return moviesRepository.getAllMovies()
+    }
+    fun getMovies(): MutableLiveData<List<Movie>>?{
+        return moviesRepository.getMovies()
+    }
+    fun getAllMoviesfromService() {
+        moviesRepository.getAllMoviesfromService()
     }
 }
