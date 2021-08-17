@@ -1,1 +1,1 @@
-This project was making with the MVVM architecture recomended by google: https://developer.android.com/jetpack/guide
+This project was made following the architecture recommended by google: https://developer.android.com/jetpack/guide
