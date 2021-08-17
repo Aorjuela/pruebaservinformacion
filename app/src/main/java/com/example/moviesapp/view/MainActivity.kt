@@ -1,23 +1,27 @@
-package com.example.moviesapp
+package com.example.moviesapp.view
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviesapp.R
+import com.example.moviesapp.model.MoviesViewModel
+import com.example.moviesapp.model.MoviesViewModelFactory
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.ViewHolder
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
 
 private var moviesViewModel: MoviesViewModel? = null
 private var moviesRecyclerView: RecyclerView? = null
 
 class MainActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,5 +57,13 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         })
+
+        adapter.setOnItemClickListener { item, view ->
+            val movieItem = item as MovieItem
+            val movie = movieItem.movie
+            val customDialogFragment = CustomDialogFragment.newInstance(movie.title,movie.overview)
+            customDialogFragment.show(supportFragmentManager,"customFragment")
+        }
     }
 }
+

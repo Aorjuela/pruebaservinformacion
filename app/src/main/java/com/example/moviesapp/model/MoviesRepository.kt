@@ -1,15 +1,17 @@
-package com.example.moviesapp
+package com.example.moviesapp.model
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import com.example.moviesapp.database.MoviesDAO
+import com.example.moviesapp.database.MoviesDatabase
+import com.example.moviesapp.service.MovieApiClient
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class MoviesRepository(
-    private var moviesDAO: MoviesDAO?,
-    private var executor: ExecutorService
+        private var moviesDAO: MoviesDAO?,
+        private var executor: ExecutorService
 ) {
     private val movieApiClient = MovieApiClient.getInstance()
     companion object {
@@ -20,10 +22,10 @@ class MoviesRepository(
                     if (INSTANCE == null){
                         var moviesDatabase: MoviesDatabase? = MoviesDatabase.getInstance(context)
                         INSTANCE =
-                            MoviesRepository(
-                                moviesDatabase?.moviesDAO(),
-                                Executors.newSingleThreadExecutor()
-                            )
+                                MoviesRepository(
+                                        moviesDatabase?.moviesDAO(),
+                                        Executors.newSingleThreadExecutor()
+                                )
                     }
                 }
             }

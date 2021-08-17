@@ -1,6 +1,8 @@
-package com.example.moviesapp
+package com.example.moviesapp.service
 
 import androidx.lifecycle.MutableLiveData
+import com.example.moviesapp.model.Movie
+import com.example.moviesapp.model.ServiceResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -61,7 +63,7 @@ class MovieApiClient {
         fun getMovies(): Call<ServiceResponse>?{
             val retrofit: Retrofit? = RetrofitClientService.getRetrofitInstance()
             val apiService: ApiService? = retrofit?.create(ApiService::class.java)
-            return apiService?.getMovies(3,1,RetrofitClientService.API_KEY)
+            return apiService?.getMovies(3,1, RetrofitClientService.API_KEY)
         }
         fun cancelRequest(){
             cancelRequest = true

@@ -1,4 +1,4 @@
-package com.example.moviesapp
+package com.example.moviesapp.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.moviesapp
+package com.example.moviesapp.model
 
 import android.app.Activity
 import android.content.Context
@@ -18,7 +18,7 @@ class MoviesViewModelFactory(
                 throw IllegalStateException("Not yet atached to application")
             }
             return MoviesViewModelFactory(
-                MoviesRepository.getInstance(context)
+                    MoviesRepository.getInstance(context)
             )
         }
     }
